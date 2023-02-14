@@ -22,6 +22,8 @@ def _adjacent(word1, word2):
 def verify_word_ladder(ladder):
     if not ladder:
         return False
+    if len(ladder) == 1:
+        return True
     for word in range(0, len(ladder) - 1):
         if not _adjacent(ladder[word], ladder[word + 1]):
             return False
