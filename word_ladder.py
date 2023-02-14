@@ -1,5 +1,5 @@
 #!/bin/python3
-import copy
+
 
 def _adjacent(word1, word2):
     if len(word1) == len(word2):
@@ -13,11 +13,11 @@ def _adjacent(word1, word2):
     '''
     Returns True if the input words differ by only a single character;
     returns False otherwise.
-  
     >>> _adjacent('phone','phony')
     True
     >>> _adjacent('stone','money')
     '''
+
 
 def verify_word_ladder(ladder):
     verify = 0
@@ -26,9 +26,8 @@ def verify_word_ladder(ladder):
     if len(ladder) == 1:
         verify = True
     for word in range(len(ladder)-1):
-        if not _adjacent(ladder[word],ladder[word+1]):
+        if not _adjacent(ladder[word], ladder[word+1]):
             return False
-            #if they are not adjacent we return false
         else:
             verify = True
     return verify
@@ -42,6 +41,7 @@ def verify_word_ladder(ladder):
     False
     '''
 
+
 def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     from collections import deque
     with open(dictionary_file, 'r') as f:
@@ -52,7 +52,6 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     queue = deque()
     queue.append(stack)
     words_used = []
-    #is the word not in the used words
     if start_word == end_word:
         return [start_word]
     if len(start_word) != len(end_word):
@@ -63,13 +62,13 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
         popped_word = copied_queue[-1]
         for word in words:
             if _adjacent(word, popped_word):
-                    if word == end_word:
-                        return stack.append(word)
-                    if word not in words_used:
-                        words_used.append(word)
-                        copied_stack = copied_queue + [word]
-                        queue.append(copied_stack)
-                        words.remove(word)
+                if word == end_word:
+                    return stack.append(word)
+                if word not in words_used:
+                    words_used.append(word)
+                    copied_stack = copied_queue + [word]
+                    queue.append(copied_stack)
+                    words.remove(word)
     return None
 
     '''
@@ -86,12 +85,14 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     ```
     may give the output
     ```
-    ['stone', 'shone', 'phone', 'phony', 'peony', 'penny', 'benny', 'bonny', 'boney', 'money']
+    ['stone', 'shone', 'phone', 'phony', 'peony', 'penny',
+    'benny', 'bonny', 'boney', 'money']
     ```
     but the possible outputs are not unique,
     so you may also get the output
     ```
-    ['stone', 'shone', 'shote', 'shots', 'soots', 'hoots', 'hooty', 'hooey', 'honey', 'money']
+    ['stone', 'shone', 'shote', 'shots', 'soots',
+    'hoots', 'hooty', 'hooey', 'honey', 'money']
     ```
     (We cannot use doctests here because the outputs are not unique.)
 
@@ -99,10 +100,3 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     the function returns `None`.
 
     '''
-
-
-
-
-#for each word in the dictionary: dictionary is ambiguous: supposed to figure out that the file dictionary_file contains the dictionary
-
-
