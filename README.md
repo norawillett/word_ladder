@@ -73,12 +73,15 @@ While the queue is not empty
 1. The test cases take a long time to run, and you will not be efficient if you are re-running them all the time.
    Instead, use the `--last-failed` flag in pytest to skip the tests that you have previously passed and only run the failing tests.
 
+1. It is often useful to focus on only a single test case at a time.
+   The `-x` flag to pytest causes the tests to stop after the first failing test case.
+
 ## Tasks
 
 Complete the following tasks:
 
 1. Fork this repo and enable github actions
-1. Update the `README.md` file so that the travis button points to your repo
+1. Update the `README.md` file so that the test case badge points to your repo
 1. Implement the `word_ladder`, `verify_word_ladder`, and `_adjacent` functions so that all test cases in `tests/test_main.py` pass
 
 If all test cases pass, you will get full credit.
