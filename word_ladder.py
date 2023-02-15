@@ -1,5 +1,5 @@
 #!/bin/python3
-
+import copy
 
 def _adjacent(word1, word2):
     if len(word1) == len(word2):
@@ -8,6 +8,8 @@ def _adjacent(word1, word2):
             if word1[i] != word2[i]:
                 count += 1
         if count <= 1:
+            print("1st word =", word1)
+            print("2nd word=", word2)
             return True
         return False
     '''
@@ -27,6 +29,7 @@ def verify_word_ladder(ladder):
     for word in range(0, len(ladder) - 1):
         if not _adjacent(ladder[word], ladder[word + 1]):
             return False
+            print("ladder=", ladder)
     return True
     '''
     Returns True if each entry of the input list is adjacent to its neighbors;
@@ -38,36 +41,35 @@ def verify_word_ladder(ladder):
     False
     '''
 
-
 def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     from collections import deque
     with open(dictionary_file, 'r') as f:
         text = f.read()
         words = text.split()
-    stack = []
-    stack.append(start_word)
-    queue = deque()
-    queue.append(stack)
-    words_used = []
     if start_word == end_word:
         return [start_word]
     if len(start_word) != len(end_word):
         return None
+    stack = []
+    stack.append(start_word)
+    queue = deque()
+    queue.append(stack)
 
     while len(queue) != 0:
-        copied_queue = queue.popleft()
-        popped_word = copied_queue[-1]
-        for word in words:
-            if _adjacent(word, popped_word):
+        current_stack = queue.popleft()
+        for word in list(words):
+            if _adjacent(current_stack[-1], word):
+                words.remove(word)
                 if word == end_word:
-                    return stack.append(word)
-                if word not in words_used:
-                    words_used.append(word)
-                    copied_stack = copied_queue + [word]
-                    queue.append(copied_stack)
-                    words.remove(word)
-    return None
+                    current_stack.append(word)
+                    return current_stack
+                copied_stack = copy.copy(current_stack)
+                copied_stack.append(word)
+                queue.append(copied_stack)
+    else:
+        return None
 
+    #my word is not getting removed from the dictionary... check reference
     '''
     Returns a list satisfying the following properties:
 
