@@ -1,6 +1,7 @@
 #!/bin/python3
 import copy
 
+
 def _adjacent(word1, word2):
     if len(word1) == len(word2):
         count = 0
@@ -41,6 +42,7 @@ def verify_word_ladder(ladder):
     False
     '''
 
+
 def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     from collections import deque
     with open(dictionary_file, 'r') as f:
@@ -69,7 +71,6 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     else:
         return None
 
-    #my word is not getting removed from the dictionary... check reference
     '''
     Returns a list satisfying the following properties:
 
